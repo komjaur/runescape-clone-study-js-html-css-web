@@ -6,6 +6,10 @@ This repository contains a minimal prototype for a RuneScape-like web game. Belo
 
 A very simple skill system is implemented in `RunescapeWebGame/js/main.js`. Click the **Train Attack** button on the web page to gain experience and watch the Attack level increase.
 
+## Combat & Inventory Demo
+
+The page also demonstrates a very small combat loop written in an object oriented style. Click **Attack Enemy** to fight a goblin. When the goblin is defeated it drops an item that appears in your inventory display.
+
 ## Skill Categories
 
 ### Combat & Survival

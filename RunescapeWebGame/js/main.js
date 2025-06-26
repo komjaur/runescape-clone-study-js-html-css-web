@@ -62,4 +62,108 @@ document.getElementById('trainAttack').addEventListener('click', () => {
   addExperience('Attack', 50);
 });
 
-window.onload = updateSkillDisplay;
+class Item {
+  constructor(name) {
+    this.name = name;
+  }
+}
+
+class Inventory {
+  constructor() {
+    this.items = [];
+  }
+
+  add(item) {
+    this.items.push(item);
+    updateInventoryDisplay();
+  }
+}
+
+class Unit {
+  constructor(name, hp = 10, attack = 1, defence = 0) {
+    this.name = name;
+    this.hp = hp;
+    this.attack = attack;
+    this.defence = defence;
+  }
+
+  isAlive() {
+    return this.hp > 0;
+  }
+}
+
+class DropTable {
+  constructor(items = []) {
+    this.items = items;
+  }
+
+  getDrop() {
+    if (this.items.length === 0) return null;
+    const idx = Math.floor(Math.random() * this.items.length);
+    return new Item(this.items[idx]);
+  }
+}
+
+class Player extends Unit {
+  constructor(name) {
+    super(name, 20, 3, 1);
+    this.inventory = new Inventory();
+  }
+}
+
+class CombatSystem {
+  static attack(attacker, defender) {
+    const damage = Math.max(1, attacker.attack - defender.defence);
+    defender.hp -= damage;
+    return damage;
+  }
+}
+
+const player = new Player('Hero');
+const goblin = new Unit('Goblin', 10, 2, 0);
+goblin.dropTable = new DropTable(['Bronze Dagger', 'Bones']);
+
+function updatePlayerDisplay() {
+  const div = document.getElementById('playerDisplay');
+  if (div) {
+    div.textContent = `${player.name} HP: ${player.hp}`;
+  }
+}
+
+function updateEnemyDisplay() {
+  const div = document.getElementById('enemyDisplay');
+  if (div) {
+    div.textContent = `${goblin.name} HP: ${goblin.hp}`;
+  }
+}
+
+function updateInventoryDisplay() {
+  const div = document.getElementById('inventoryDisplay');
+  if (div) {
+    div.textContent = 'Inventory: ' + player.inventory.items.map(i => i.name).join(', ');
+  }
+}
+
+function combatRound() {
+  if (!player.isAlive() || !goblin.isAlive()) return;
+  CombatSystem.attack(player, goblin);
+  if (!goblin.isAlive()) {
+    const drop = goblin.dropTable.getDrop();
+    if (drop) {
+      player.inventory.add(drop);
+    }
+  } else {
+    CombatSystem.attack(goblin, player);
+  }
+  updatePlayerDisplay();
+  updateEnemyDisplay();
+}
+
+document.getElementById('attackEnemy').addEventListener('click', combatRound);
+
+window.onload = () => {
+  updateSkillDisplay();
+  updatePlayerDisplay();
+  updateEnemyDisplay();
+  updateInventoryDisplay();
+};
