@@ -9,6 +9,8 @@ This project is a small browser experiment that mimics some of the classic mecha
 2. Click **Train Attack** to gain experience and level up the Attack skill.
 3. Click **Attack Enemy** to fight a goblin. If you win, its loot appears in your inventory.
 4. Click **Go on Forest Adventure** to automatically battle monsters for five seconds. The summary lists any kills and items found.
+5. Use **Buy Bronze Dagger** to purchase gear from the shop or **Sell First Item** to earn gold.
+6. Click **Start Goblin Quest** and defeat goblins to claim a reward.
 
 Watch the displays on the page update with your current hit points, enemy health, skills and inventory as you interact with the buttons.
 
@@ -32,14 +34,16 @@ The prototype now includes:
 - **Persistent saves** using local storage so your progress survives a page refresh.
 - **More adventure locations** like the Graveyard and Orc Camp with unique enemies and rewards.
 - **Equipment bonuses** that boost stats when you equip weapons or armor.
+- **NPC shop** to buy and sell basic gear.
+- **Starter quest** to slay goblins for a gold reward.
 
 ### Possible Next Steps
 
 Here are a few ideas for future features:
 
-- NPC shops to buy and sell items.
-- A simple quest system that gives tasks and rewards.
 - Sound effects during combat and leveling.
+- Character customization options.
+- Expanded crafting professions.
 
 ## Available Skills
 

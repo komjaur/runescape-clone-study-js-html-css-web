@@ -28,6 +28,9 @@ function startAdventure(adventure) {
     const unit = createUnit(type);
     if (!unit) return;
     killsDuringAdventure[unit.name] = (killsDuringAdventure[unit.name] || 0) + 1;
+    if (typeof currentQuest !== 'undefined' && currentQuest) {
+      currentQuest.registerKill(unit.name);
+    }
     const drop = unit.dropTable.getDrop();
     if (drop) {
       player.inventory.add(drop);
