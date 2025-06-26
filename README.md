@@ -25,13 +25,21 @@ The logic is split across a few small scripts:
 - `adventure.js` drives the timed adventure encounters.
 - `main.js` wires everything together and updates the page.
 
-## Next Features
+## Recent Improvements
 
-Planned improvements for the prototype include:
+The prototype now includes:
 
-- **Persistent saves** so your progress survives a page refresh.
-- **More adventure locations** that offer different enemy types and rewards.
-- **Equipment bonuses** that boost stats when you wear weapons or armor.
+- **Persistent saves** using local storage so your progress survives a page refresh.
+- **More adventure locations** like the Graveyard and Orc Camp with unique enemies and rewards.
+- **Equipment bonuses** that boost stats when you equip weapons or armor.
+
+### Possible Next Steps
+
+Here are a few ideas for future features:
+
+- NPC shops to buy and sell items.
+- A simple quest system that gives tasks and rewards.
+- Sound effects during combat and leveling.
 
 ## Available Skills
 
