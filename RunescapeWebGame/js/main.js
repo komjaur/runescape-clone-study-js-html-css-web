@@ -1,3 +1,7 @@
+
+const player = new Player('Hero');
+const goblin = createUnit('goblin');
+=======
 // Simple RuneScape-like skill system demonstration
 
 const skills = {
@@ -123,6 +127,7 @@ const player = new Player('Hero');
 const goblin = new Unit('Goblin', 10, 2, 0);
 goblin.dropTable = new DropTable(['Bronze Dagger', 'Bones']);
 
+
 function updatePlayerDisplay() {
   const div = document.getElementById('playerDisplay');
   if (div) {
@@ -161,9 +166,16 @@ function combatRound() {
 
 document.getElementById('attackEnemy').addEventListener('click', combatRound);
 
+document.getElementById('forestAdventure').addEventListener('click', () => startAdventure(adventures[0]));
+
+
 window.onload = () => {
   updateSkillDisplay();
   updatePlayerDisplay();
   updateEnemyDisplay();
   updateInventoryDisplay();
+
+  const status = document.getElementById('adventureStatus');
+  if (status) status.textContent = 'No active adventure';
+
 };
