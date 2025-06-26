@@ -15,6 +15,15 @@ Watch the displays on the page update with your current hit points, enemy health
 
 The JavaScript code defines simple object-oriented classes for units, items and drop tables. Combat is turn based and very minimal. The adventure system spawns random enemies over a timed interval while collecting their drops. All state exists only in memory while the page is open.
 
+## Code Structure
+
+The logic is split across a few small scripts:
+
+- `skills.js` defines the RuneScape-like skill system.
+- `entities.js` contains items, inventories, units and combat helpers.
+- `adventure.js` drives the timed adventure encounters.
+- `main.js` wires everything together and updates the page.
+
 ## Next Features
 
 Planned improvements for the prototype include:
