@@ -3,6 +3,9 @@ const itemDatabase = {
   'Iron Sword': { name: 'Iron Sword', slot: 'weapon', attack: 2, defence: 0 },
   'Leather Armor': { name: 'Leather Armor', slot: 'armor', attack: 0, defence: 1 },
   'Iron Armor': { name: 'Iron Armor', slot: 'armor', attack: 0, defence: 2 },
+  'Steel Axe': { name: 'Steel Axe', slot: 'weapon', attack: 3, defence: 0 },
+  'Steel Shield': { name: 'Steel Shield', slot: 'armor', attack: 0, defence: 4 },
+  'Ghost Robe': { name: 'Ghost Robe', slot: 'armor', attack: 0, defence: 3 },
   'Bones': { name: 'Bones', slot: null, attack: 0, defence: 0 }
 };
 
@@ -87,6 +90,18 @@ class Player extends Unit {
       this.equipment.weapon = item;
     } else if (item.slot === 'armor') {
       this.equipment.armor = item;
+    }
+    updateEquipmentDisplay();
+    saveGame();
+  }
+
+  unequip(slot) {
+    if (slot === 'weapon' && this.equipment.weapon) {
+      this.inventory.add(this.equipment.weapon);
+      this.equipment.weapon = null;
+    } else if (slot === 'armor' && this.equipment.armor) {
+      this.inventory.add(this.equipment.armor);
+      this.equipment.armor = null;
     }
     updateEquipmentDisplay();
     saveGame();

@@ -19,5 +19,19 @@ const unitDatabase = {
     attack: 5,
     defence: 2,
     drops: ['Iron Armor', 'Bones']
+  },
+  ghost: {
+    name: 'Ghost',
+    hp: 20,
+    attack: 4,
+    defence: 1,
+    drops: ['Ghost Robe', 'Bones']
+  },
+  darkMage: {
+    name: 'Dark Mage',
+    hp: 30,
+    attack: 6,
+    defence: 3,
+    drops: ['Steel Axe', 'Steel Shield']
   }
 };

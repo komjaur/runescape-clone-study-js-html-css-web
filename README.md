@@ -30,8 +30,9 @@ The logic is split across a few small scripts:
 The prototype now includes:
 
 - **Persistent saves** using local storage so your progress survives a page refresh.
-- **More adventure locations** like the Graveyard and Orc Camp with unique enemies and rewards.
+- **More adventure locations** like the Graveyard, Orc Camp, Haunted Woods and Dark Tower.
 - **Equipment bonuses** that boost stats when you equip weapons or armor.
+- **Ability to equip and unequip items** with bonuses applied to combat.
 
 ### Possible Next Steps
 
@@ -40,6 +41,9 @@ Here are a few ideas for future features:
 - NPC shops to buy and sell items.
 - A simple quest system that gives tasks and rewards.
 - Sound effects during combat and leveling.
+- Player versus player duels.
+- A basic crafting system.
+- Achievement tracking for milestones.
 
 ## Available Skills
 

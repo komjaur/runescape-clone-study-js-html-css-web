@@ -9,7 +9,9 @@ class Adventure {
 const adventures = [
   new Adventure('Forest Patrol', 5000, ['goblin', 'skeleton']),
   new Adventure('Graveyard Run', 6000, ['skeleton']),
-  new Adventure('Orc Camp', 7000, ['orc'])
+  new Adventure('Orc Camp', 7000, ['orc']),
+  new Adventure('Haunted Woods', 8000, ['ghost', 'skeleton']),
+  new Adventure('Dark Tower', 9000, ['darkMage', 'orc'])
 ];
 
 let activeAdventure = null;

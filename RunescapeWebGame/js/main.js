@@ -82,6 +82,8 @@ document.getElementById('attackEnemy').addEventListener('click', combatRound);
 document.getElementById('forestAdventure').addEventListener('click', () => startAdventure(adventures[0]));
 document.getElementById('graveyardAdventure').addEventListener('click', () => startAdventure(adventures[1]));
 document.getElementById('orcAdventure').addEventListener('click', () => startAdventure(adventures[2]));
+document.getElementById('hauntedAdventure').addEventListener('click', () => startAdventure(adventures[3]));
+document.getElementById('towerAdventure').addEventListener('click', () => startAdventure(adventures[4]));
 
 document.getElementById('equipWeapon').addEventListener('click', () => {
   const item = player.inventory.items.find(i => i.slot === 'weapon');
@@ -91,6 +93,14 @@ document.getElementById('equipWeapon').addEventListener('click', () => {
 document.getElementById('equipArmor').addEventListener('click', () => {
   const item = player.inventory.items.find(i => i.slot === 'armor');
   if (item) player.equip(item);
+});
+
+document.getElementById('unequipWeapon').addEventListener('click', () => {
+  player.unequip('weapon');
+});
+
+document.getElementById('unequipArmor').addEventListener('click', () => {
+  player.unequip('armor');
 });
 
 window.onload = () => {
