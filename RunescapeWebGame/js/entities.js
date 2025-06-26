@@ -1,19 +1,20 @@
 const itemDatabase = {
-  'Bronze Dagger': { name: 'Bronze Dagger', slot: 'weapon', attack: 1, defence: 0 },
-  'Iron Sword': { name: 'Iron Sword', slot: 'weapon', attack: 2, defence: 0 },
-  'Leather Armor': { name: 'Leather Armor', slot: 'armor', attack: 0, defence: 1 },
-  'Iron Armor': { name: 'Iron Armor', slot: 'armor', attack: 0, defence: 2 },
-  'Bones': { name: 'Bones', slot: null, attack: 0, defence: 0 }
+  'Bronze Dagger': { name: 'Bronze Dagger', slot: 'weapon', attack: 1, defence: 0, price: 5 },
+  'Iron Sword': { name: 'Iron Sword', slot: 'weapon', attack: 2, defence: 0, price: 10 },
+  'Leather Armor': { name: 'Leather Armor', slot: 'armor', attack: 0, defence: 1, price: 8 },
+  'Iron Armor': { name: 'Iron Armor', slot: 'armor', attack: 0, defence: 2, price: 15 },
+  'Bones': { name: 'Bones', slot: null, attack: 0, defence: 0, price: 1 }
 };
 
 class Item {
   constructor(key) {
-    const data = itemDatabase[key] || { name: key, slot: null, attack: 0, defence: 0 };
+    const data = itemDatabase[key] || { name: key, slot: null, attack: 0, defence: 0, price: 0 };
     this.key = key;
     this.name = data.name;
     this.slot = data.slot;
     this.attackBonus = data.attack;
     this.defenceBonus = data.defence;
+    this.price = data.price || 0;
   }
 }
 
@@ -79,6 +80,7 @@ class Player extends Unit {
   constructor(name) {
     super(name, 20, 3, 1);
     this.inventory = new Inventory();
+    this.gold = 0;
   }
 
   equip(item) {
@@ -90,6 +92,20 @@ class Player extends Unit {
     }
     updateEquipmentDisplay();
     saveGame();
+  }
+
+  addGold(amount) {
+    this.gold += amount;
+    updateGoldDisplay();
+    saveGame();
+  }
+
+  spendGold(amount) {
+    if (this.gold < amount) return false;
+    this.gold -= amount;
+    updateGoldDisplay();
+    saveGame();
+    return true;
   }
 }
 

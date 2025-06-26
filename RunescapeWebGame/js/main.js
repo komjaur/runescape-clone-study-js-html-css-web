@@ -11,9 +11,18 @@ function saveGame() {
       equipment: {
         weapon: player.equipment.weapon ? player.equipment.weapon.key : null,
         armor: player.equipment.armor ? player.equipment.armor.key : null
-      }
+      },
+      gold: player.gold
     },
-    skills
+    skills,
+    quest: currentQuest ? {
+      name: currentQuest.name,
+      target: currentQuest.target,
+      count: currentQuest.count,
+      progress: currentQuest.progress,
+      rewardGold: currentQuest.rewardGold,
+      completed: currentQuest.completed
+    } : null
   };
   localStorage.setItem('gameSave', JSON.stringify(data));
 }
@@ -29,11 +38,17 @@ function loadGame() {
       if (data.player.equipment.weapon) player.equip(new Item(data.player.equipment.weapon));
       if (data.player.equipment.armor) player.equip(new Item(data.player.equipment.armor));
     }
+    player.gold = data.player.gold || 0;
     for (const [name, info] of Object.entries(data.skills)) {
       if (skills[name]) {
         skills[name].level = info.level;
         skills[name].xp = info.xp;
       }
+    }
+    if (data.quest) {
+      currentQuest = new Quest(data.quest.name, data.quest.target, data.quest.count, data.quest.rewardGold);
+      currentQuest.progress = data.quest.progress;
+      currentQuest.completed = data.quest.completed;
     }
   } catch (e) {
     console.error('Failed to load save', e);
@@ -55,6 +70,17 @@ function updateInventoryDisplay() {
   if (div) div.textContent = 'Inventory: ' + player.inventory.items.map(i => i.name).join(', ');
 }
 
+function updateShopDisplay() {
+  const div = document.getElementById('shopDisplay');
+  if (!div) return;
+  div.textContent = 'Shop sells: ' + shop.items.join(', ');
+}
+
+function updateGoldDisplay() {
+  const div = document.getElementById('goldDisplay');
+  if (div) div.textContent = `Gold: ${player.gold}`;
+}
+
 function updateEquipmentDisplay() {
   const div = document.getElementById('equipmentDisplay');
   if (!div) return;
@@ -69,6 +95,9 @@ function combatRound() {
   if (!goblin.isAlive()) {
     const drop = goblin.dropTable.getDrop();
     if (drop) player.inventory.add(drop);
+    if (typeof currentQuest !== 'undefined' && currentQuest) {
+      currentQuest.registerKill(goblin.name);
+    }
   } else {
     CombatSystem.attack(goblin, player);
   }
@@ -93,6 +122,23 @@ document.getElementById('equipArmor').addEventListener('click', () => {
   if (item) player.equip(item);
 });
 
+document.getElementById('buyBronze').addEventListener('click', () => {
+  shop.buy(player, 'Bronze Dagger');
+  updateGoldDisplay();
+  });
+
+document.getElementById('sellItem').addEventListener('click', () => {
+  const item = player.inventory.items[0];
+  if (item) shop.sell(player, item);
+  updateGoldDisplay();
+  updateInventoryDisplay();
+});
+
+document.getElementById('startQuest').addEventListener('click', () => {
+  startQuest();
+  updateQuestDisplay();
+});
+
 window.onload = () => {
   loadGame();
   updateSkillDisplay();
@@ -100,6 +146,9 @@ window.onload = () => {
   updateEnemyDisplay();
   updateInventoryDisplay();
   updateEquipmentDisplay();
+  updateGoldDisplay();
+  updateShopDisplay();
   const status = document.getElementById('adventureStatus');
   if (status) status.textContent = 'No active adventure';
+  updateQuestDisplay();
 };
