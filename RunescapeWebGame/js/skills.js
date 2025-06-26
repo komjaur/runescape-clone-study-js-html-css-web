@@ -45,6 +45,7 @@ function addExperience(skill, amount) {
     console.log(`${skill} leveled up to ${data.level}!`);
   }
   updateSkillDisplay();
+  if (typeof saveGame === 'function') saveGame();
 }
 
 function updateSkillDisplay() {

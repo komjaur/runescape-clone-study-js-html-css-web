@@ -7,7 +7,9 @@ class Adventure {
 }
 
 const adventures = [
-  new Adventure('Forest Patrol', 5000, ['goblin', 'skeleton'])
+  new Adventure('Forest Patrol', 5000, ['goblin', 'skeleton']),
+  new Adventure('Graveyard Run', 6000, ['skeleton']),
+  new Adventure('Orc Camp', 7000, ['orc'])
 ];
 
 let activeAdventure = null;
@@ -42,6 +44,7 @@ function endAdventure() {
   adventureInterval = null;
   adventureTimeout = null;
   updateInventoryDisplay();
+  saveGame();
   let report = `Finished ${activeAdventure.name}! `;
   const killText = Object.entries(killsDuringAdventure)
     .map(([n,c]) => `${c} ${n}`)

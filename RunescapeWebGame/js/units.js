@@ -12,5 +12,12 @@ const unitDatabase = {
     attack: 3,
     defence: 1,
     drops: ['Bones', 'Iron Sword']
+  },
+  orc: {
+    name: 'Orc',
+    hp: 25,
+    attack: 5,
+    defence: 2,
+    drops: ['Iron Armor', 'Bones']
   }
 };
