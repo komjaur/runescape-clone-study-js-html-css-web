@@ -3,8 +3,10 @@ CREATE TABLE IF NOT EXISTS users (
     username VARCHAR(255) UNIQUE NOT NULL
 );
 
+
 CREATE TABLE IF NOT EXISTS saves (
     user_id INT PRIMARY KEY,
     data LONGTEXT,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
+

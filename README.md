@@ -12,7 +12,9 @@ This project is a small browser experiment that mimics some of the classic mecha
 5. Click **Go on Forest Adventure** to automatically battle monsters for five seconds. The summary lists any kills and items found.
 6. Use **Buy Bronze Dagger** to purchase gear from the shop or **Sell First Item** to earn gold.
 7. Click **Start Goblin Quest** and defeat goblins to claim a reward.
+
 8. Your progress is automatically saved to MySQL after each action.
+
 
 Watch the displays on the page update with your current hit points, enemy health, skills and inventory as you interact with the buttons.
 
@@ -31,7 +33,9 @@ The logic is split across a few small scripts:
 
 ## Server Setup
 
+
 The project now includes a small PHP backend for user logins and server-side saving. Configure `php/db.php` with your MySQL credentials and run the SQL in `php/schema.sql` to create the required tables. Start a PHP server and open `php/login.php` to begin. The game automatically calls `php/save.php` and `php/load.php` to persist your progress.
+
 
 ## Recent Improvements
 
