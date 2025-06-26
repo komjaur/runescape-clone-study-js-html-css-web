@@ -29,39 +29,46 @@ function saveGame() {
       storage: playerHouse.storage.map(i => i.key)
     }
   };
-  localStorage.setItem('gameSave', JSON.stringify(data));
+  fetch(`${API_BASE}/save.php`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ save: data })
+  });
 }
 
 function loadGame() {
-  const raw = localStorage.getItem('gameSave');
-  if (!raw) return;
-  try {
-    const data = JSON.parse(raw);
-    player.hp = data.player.hp;
-    player.inventory.items = data.player.inventory.map(n => new Item(n));
-    if (data.player.equipment) {
-      if (data.player.equipment.weapon) player.equip(new Item(data.player.equipment.weapon));
-      if (data.player.equipment.armor) player.equip(new Item(data.player.equipment.armor));
-    }
-    player.gold = data.player.gold || 0;
-    for (const [name, info] of Object.entries(data.skills)) {
-      if (skills[name]) {
-        skills[name].level = info.level;
-        skills[name].xp = info.xp;
+  fetch(`${API_BASE}/load.php`)
+    .then(r => r.json())
+    .then(data => {
+      if (!data) return;
+      try {
+        player.hp = data.player.hp;
+        player.inventory.items = data.player.inventory.map(n => new Item(n));
+        if (data.player.equipment) {
+          if (data.player.equipment.weapon) player.equip(new Item(data.player.equipment.weapon));
+          if (data.player.equipment.armor) player.equip(new Item(data.player.equipment.armor));
+        }
+        player.gold = data.player.gold || 0;
+        for (const [name, info] of Object.entries(data.skills)) {
+          if (skills[name]) {
+            skills[name].level = info.level;
+            skills[name].xp = info.xp;
+          }
+        }
+        if (data.quest) {
+          currentQuest = new Quest(data.quest.name, data.quest.target, data.quest.count, data.quest.rewardGold);
+          currentQuest.progress = data.quest.progress;
+          currentQuest.completed = data.quest.completed;
+        }
+        if (data.house) {
+          playerHouse.trophies = data.house.trophies || [];
+          playerHouse.storage = (data.house.storage || []).map(n => new Item(n));
+        }
+      } catch (e) {
+        console.error('Failed to load save', e);
       }
-    }
-    if (data.quest) {
-      currentQuest = new Quest(data.quest.name, data.quest.target, data.quest.count, data.quest.rewardGold);
-      currentQuest.progress = data.quest.progress;
-      currentQuest.completed = data.quest.completed;
-    }
-    if (data.house) {
-      playerHouse.trophies = data.house.trophies || [];
-      playerHouse.storage = (data.house.storage || []).map(n => new Item(n));
-    }
-  } catch (e) {
-    console.error('Failed to load save', e);
-  }
+    })
+    .catch(e => console.error('Failed to fetch save', e));
 }
 
 function updatePlayerDisplay() {
