@@ -19,5 +19,12 @@ const unitDatabase = {
     attack: 5,
     defence: 2,
     drops: ['Iron Armor', 'Bones']
+  },
+  trollKing: {
+    name: 'Troll King',
+    hp: 50,
+    attack: 8,
+    defence: 5,
+    drops: ["King's Crown"]
   }
 };

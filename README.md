@@ -36,6 +36,8 @@ The prototype now includes:
 - **Equipment bonuses** that boost stats when you equip weapons or armor.
 - **NPC shop** to buy and sell basic gear.
 - **Starter quest** to slay goblins for a gold reward.
+- **Player housing** to display trophies and store extra items.
+- **Troll King boss encounter** with unique crown loot.
 
 ### Possible Next Steps
 
@@ -44,6 +46,9 @@ Here are a few ideas for future features:
 - Sound effects during combat and leveling.
 - Character customization options.
 - Expanded crafting professions.
+- Player-owned farming plots.
+- Clan support for group play.
+- Pets that can aid in combat.
 
 ## Available Skills
 
