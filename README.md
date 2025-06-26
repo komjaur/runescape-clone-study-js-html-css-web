@@ -5,12 +5,13 @@ This project is a small browser experiment that mimics some of the classic mecha
 
 ## Playing the Demo
 
-1. Open `RunescapeWebGame/html/index.html` in your web browser.
-2. Click **Train Attack** to gain experience and level up the Attack skill.
-3. Click **Attack Enemy** to fight a goblin. If you win, its loot appears in your inventory.
-4. Click **Go on Forest Adventure** to automatically battle monsters for five seconds. The summary lists any kills and items found.
-5. Use **Buy Bronze Dagger** to purchase gear from the shop or **Sell First Item** to earn gold.
-6. Click **Start Goblin Quest** and defeat goblins to claim a reward.
+1. Open `php/login.php` in your web browser and log in with a username.
+2. After logging in you will be redirected to the game.
+3. Click **Train Attack** to gain experience and level up the Attack skill.
+4. Click **Attack Enemy** to fight a goblin. If you win, its loot appears in your inventory.
+5. Click **Go on Forest Adventure** to automatically battle monsters for five seconds. The summary lists any kills and items found.
+6. Use **Buy Bronze Dagger** to purchase gear from the shop or **Sell First Item** to earn gold.
+7. Click **Start Goblin Quest** and defeat goblins to claim a reward.
 
 Watch the displays on the page update with your current hit points, enemy health, skills and inventory as you interact with the buttons.
 
@@ -26,6 +27,10 @@ The logic is split across a few small scripts:
 - `entities.js` contains items, inventories, units and combat helpers.
 - `adventure.js` drives the timed adventure encounters.
 - `main.js` wires everything together and updates the page.
+
+## Server Setup
+
+The project now includes a small PHP backend for user logins. Configure `php/db.php` with your MySQL credentials and run the SQL in `php/schema.sql` to create the required table. Start a PHP server and open `php/login.php` to begin.
 
 ## Recent Improvements
 
