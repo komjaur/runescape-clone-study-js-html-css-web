@@ -1,3 +1,10 @@
+<?php
+session_start();
+if(!isset($_SESSION["username"])) {
+    header("Location: ../../php/login.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +14,7 @@
   <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
+  <p>Welcome <?php echo htmlspecialchars($_SESSION["username"]); ?> | <a href="../../php/logout.php">Logout</a></p>
   <div id="skillDisplay"></div>
   <button id="trainAttack">Train Attack</button>
   <div id="playerDisplay"></div>
