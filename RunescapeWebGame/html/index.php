@@ -1,3 +1,10 @@
+<?php
+session_start();
+if(!isset($_SESSION["username"])) {
+    header("Location: ../../php/login.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +14,7 @@
   <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
+  <p>Welcome <?php echo htmlspecialchars($_SESSION["username"]); ?> | <a href="../../php/logout.php">Logout</a></p>
   <div id="skillDisplay"></div>
   <button id="trainAttack">Train Attack</button>
   <div id="playerDisplay"></div>
@@ -36,6 +44,10 @@
   <div id="questDisplay"></div>
 
   <canvas id="gameCanvas" width="800" height="600"></canvas>
+  <script>
+    const API_BASE = '../../php';
+    const USER_ID = <?php echo (int)$_SESSION['user_id']; ?>;
+  </script>
   <script src="../js/units.js"></script>
   <script src="../js/skills.js"></script>
   <script src="../js/entities.js"></script>
