@@ -38,6 +38,22 @@ The prototype now includes:
 - **Starter quest** to slay goblins for a gold reward.
 - **Player housing** to display trophies and store extra items.
 - **Troll King boss encounter** with unique crown loot.
+- **Auction house** using PHP/MySQL to trade items with other players.
+
+## Auction House Backend
+
+The `php/auction_house.php` script provides simple endpoints to list current sales and to buy or sell items. Set up a MySQL database with a table:
+
+```sql
+CREATE TABLE auctions (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  item VARCHAR(50),
+  price INT,
+  seller VARCHAR(50)
+);
+```
+
+Run a PHP server in `RunescapeWebGame/php` and adjust the connection details in the script as needed.
 
 ### Possible Next Steps
 

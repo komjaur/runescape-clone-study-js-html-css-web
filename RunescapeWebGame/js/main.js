@@ -167,6 +167,9 @@ document.getElementById('sellItem').addEventListener('click', () => {
   updateInventoryDisplay();
 });
 
+document.getElementById('viewAuctions').addEventListener('click', loadAuctions);
+document.getElementById('sellToAuction').addEventListener('click', sellFirstItem);
+
 document.getElementById('startQuest').addEventListener('click', () => {
   startQuest();
   updateQuestDisplay();
@@ -186,4 +189,5 @@ window.onload = () => {
   updateQuestDisplay();
   updateHouseDisplay();
   updateBossDisplay();
+  loadAuctions();
 };
