@@ -2,6 +2,7 @@
 
 const player = new Player('Hero');
 const goblin = createUnit('goblin');
+let currentBoss = createUnit('trollKing');
 
 function saveGame() {
   const data = {
@@ -22,7 +23,11 @@ function saveGame() {
       progress: currentQuest.progress,
       rewardGold: currentQuest.rewardGold,
       completed: currentQuest.completed
-    } : null
+    } : null,
+    house: {
+      trophies: playerHouse.trophies,
+      storage: playerHouse.storage.map(i => i.key)
+    }
   };
   localStorage.setItem('gameSave', JSON.stringify(data));
 }
@@ -50,6 +55,10 @@ function loadGame() {
       currentQuest.progress = data.quest.progress;
       currentQuest.completed = data.quest.completed;
     }
+    if (data.house) {
+      playerHouse.trophies = data.house.trophies || [];
+      playerHouse.storage = (data.house.storage || []).map(n => new Item(n));
+    }
   } catch (e) {
     console.error('Failed to load save', e);
   }
@@ -63,6 +72,11 @@ function updatePlayerDisplay() {
 function updateEnemyDisplay() {
   const div = document.getElementById('enemyDisplay');
   if (div) div.textContent = `${goblin.name} HP: ${goblin.hp}`;
+}
+
+function updateBossDisplay() {
+  const div = document.getElementById('enemyDisplay');
+  if (div) div.textContent = `${currentBoss.name} HP: ${currentBoss.hp}`;
 }
 
 function updateInventoryDisplay() {
@@ -106,7 +120,26 @@ function combatRound() {
   saveGame();
 }
 
+function bossRound() {
+  if (!player.isAlive() || !currentBoss.isAlive()) return;
+  CombatSystem.attack(player, currentBoss);
+  if (!currentBoss.isAlive()) {
+    const drop = currentBoss.dropTable.getDrop();
+    if (drop) {
+      player.inventory.add(drop);
+      playerHouse.addTrophy(drop.name);
+    }
+    currentBoss = createUnit('trollKing');
+  } else {
+    CombatSystem.attack(currentBoss, player);
+  }
+  updatePlayerDisplay();
+  updateBossDisplay();
+  saveGame();
+}
+
 document.getElementById('attackEnemy').addEventListener('click', combatRound);
+document.getElementById('challengeBoss').addEventListener('click', bossRound);
 
 document.getElementById('forestAdventure').addEventListener('click', () => startAdventure(adventures[0]));
 document.getElementById('graveyardAdventure').addEventListener('click', () => startAdventure(adventures[1]));
@@ -151,4 +184,6 @@ window.onload = () => {
   const status = document.getElementById('adventureStatus');
   if (status) status.textContent = 'No active adventure';
   updateQuestDisplay();
+  updateHouseDisplay();
+  updateBossDisplay();
 };
