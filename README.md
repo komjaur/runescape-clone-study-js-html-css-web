@@ -1,5 +1,6 @@
 # RuneScape Web Game Prototype
 
+
 This project is a small browser experiment that mimics some of the classic mechanics from RuneScape. It is not a full game, but a starting point for exploring combat, skills and simple adventures using only HTML, CSS and JavaScript.
 
 ## Playing the Demo
@@ -35,6 +36,19 @@ Planned improvements for the prototype include:
 ## Available Skills
 
 The skill list below mirrors the style of RuneScape and groups skills into categories.
+=======
+This repository contains a minimal prototype for a RuneScape-like web game. Below is a list of potential skills grouped into categories.
+
+## Skill System Demo
+
+A very simple skill system is implemented in `RunescapeWebGame/js/main.js`. Click the **Train Attack** button on the web page to gain experience and watch the Attack level increase.
+
+## Combat & Inventory Demo
+
+The page also demonstrates a very small combat loop written in an object oriented style. Click **Attack Enemy** to fight a goblin. When the goblin is defeated it drops an item that appears in your inventory display.
+
+## Skill Categories
+
 
 ### Combat & Survival
 - Attack
