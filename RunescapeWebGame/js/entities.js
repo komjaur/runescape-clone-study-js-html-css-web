@@ -3,7 +3,9 @@ const itemDatabase = {
   'Iron Sword': { name: 'Iron Sword', slot: 'weapon', attack: 2, defence: 0, price: 10 },
   'Leather Armor': { name: 'Leather Armor', slot: 'armor', attack: 0, defence: 1, price: 8 },
   'Iron Armor': { name: 'Iron Armor', slot: 'armor', attack: 0, defence: 2, price: 15 },
-  'Bones': { name: 'Bones', slot: null, attack: 0, defence: 0, price: 1 }
+  'Bones': { name: 'Bones', slot: null, attack: 0, defence: 0, price: 1 },
+  'Iron Ore': { name: 'Iron Ore', slot: null, attack: 0, defence: 0, price: 2 },
+  'Iron Bar': { name: 'Iron Bar', slot: null, attack: 0, defence: 0, price: 5 }
 };
 
 class Item {
@@ -81,6 +83,10 @@ class Player extends Unit {
     super(name, 20, 3, 1);
     this.inventory = new Inventory();
     this.gold = 0;
+    this.appearance = {
+      hairColor: 'Brown',
+      outfitColor: 'Green'
+    };
   }
 
   equip(item) {
@@ -106,6 +112,13 @@ class Player extends Unit {
     updateGoldDisplay();
     saveGame();
     return true;
+  }
+
+  setAppearance(hair, outfit) {
+    this.appearance.hairColor = hair;
+    this.appearance.outfitColor = outfit;
+    updateAppearanceDisplay();
+    saveGame();
   }
 }
 

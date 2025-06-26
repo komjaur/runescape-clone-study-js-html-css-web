@@ -12,7 +12,8 @@ function saveGame() {
         weapon: player.equipment.weapon ? player.equipment.weapon.key : null,
         armor: player.equipment.armor ? player.equipment.armor.key : null
       },
-      gold: player.gold
+      gold: player.gold,
+      appearance: player.appearance
     },
     skills,
     quest: currentQuest ? {
@@ -39,6 +40,9 @@ function loadGame() {
       if (data.player.equipment.armor) player.equip(new Item(data.player.equipment.armor));
     }
     player.gold = data.player.gold || 0;
+    if (data.player.appearance) {
+      player.appearance = data.player.appearance;
+    }
     for (const [name, info] of Object.entries(data.skills)) {
       if (skills[name]) {
         skills[name].level = info.level;
@@ -89,6 +93,14 @@ function updateEquipmentDisplay() {
   div.textContent = `Weapon: ${weapon} | Armor: ${armor}`;
 }
 
+function updateAppearanceDisplay() {
+  const div = document.getElementById('appearanceDisplay');
+  if (!div) return;
+  const hair = player.appearance.hairColor;
+  const outfit = player.appearance.outfitColor;
+  div.textContent = `Hair: ${hair} | Outfit: ${outfit}`;
+}
+
 function combatRound() {
   if (!player.isAlive() || !goblin.isAlive()) return;
   CombatSystem.attack(player, goblin);
@@ -134,6 +146,20 @@ document.getElementById('sellItem').addEventListener('click', () => {
   updateInventoryDisplay();
 });
 
+document.getElementById('craftIronBar').addEventListener('click', () => {
+  craft('Iron Bar');
+});
+
+document.getElementById('craftIronSword').addEventListener('click', () => {
+  craft('Iron Sword');
+});
+
+document.getElementById('applyAppearance').addEventListener('click', () => {
+  const hair = document.getElementById('hairColor').value;
+  const outfit = document.getElementById('outfitColor').value;
+  player.setAppearance(hair, outfit);
+});
+
 document.getElementById('startQuest').addEventListener('click', () => {
   startQuest();
   updateQuestDisplay();
@@ -148,6 +174,8 @@ window.onload = () => {
   updateEquipmentDisplay();
   updateGoldDisplay();
   updateShopDisplay();
+  updateCraftingDisplay();
+  updateAppearanceDisplay();
   const status = document.getElementById('adventureStatus');
   if (status) status.textContent = 'No active adventure';
   updateQuestDisplay();

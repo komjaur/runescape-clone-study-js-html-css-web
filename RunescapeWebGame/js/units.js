@@ -11,13 +11,13 @@ const unitDatabase = {
     hp: 15,
     attack: 3,
     defence: 1,
-    drops: ['Bones', 'Iron Sword']
+    drops: ['Bones', 'Iron Sword', 'Iron Ore']
   },
   orc: {
     name: 'Orc',
     hp: 25,
     attack: 5,
     defence: 2,
-    drops: ['Iron Armor', 'Bones']
+    drops: ['Iron Armor', 'Bones', 'Iron Bar']
   }
 };

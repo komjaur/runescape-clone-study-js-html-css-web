@@ -11,6 +11,8 @@ This project is a small browser experiment that mimics some of the classic mecha
 4. Click **Go on Forest Adventure** to automatically battle monsters for five seconds. The summary lists any kills and items found.
 5. Use **Buy Bronze Dagger** to purchase gear from the shop or **Sell First Item** to earn gold.
 6. Click **Start Goblin Quest** and defeat goblins to claim a reward.
+7. Craft items using **Craft Iron Bar** and **Craft Iron Sword** when you have the materials.
+8. Customize your character by entering colors and pressing **Apply Appearance**.
 
 Watch the displays on the page update with your current hit points, enemy health, skills and inventory as you interact with the buttons.
 
@@ -36,14 +38,16 @@ The prototype now includes:
 - **Equipment bonuses** that boost stats when you equip weapons or armor.
 - **NPC shop** to buy and sell basic gear.
 - **Starter quest** to slay goblins for a gold reward.
+- **Character customization** with selectable hair and outfit colors.
+- **Simple crafting** to smelt ore into bars and forge weapons.
 
 ### Possible Next Steps
 
 Here are a few ideas for future features:
 
-- Sound effects during combat and leveling.
-- Character customization options.
-- Expanded crafting professions.
+- Player housing to display trophies and storage.
+- Challenging boss encounters with unique loot.
+- Basic chat to communicate with other players.
 
 ## Available Skills
 

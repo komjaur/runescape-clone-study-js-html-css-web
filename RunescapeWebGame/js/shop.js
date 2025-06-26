@@ -23,4 +23,4 @@ class Shop {
   }
 }
 
-const shop = new Shop(['Bronze Dagger', 'Iron Sword', 'Leather Armor']);
+const shop = new Shop(['Bronze Dagger', 'Iron Sword', 'Leather Armor', 'Iron Ore']);
