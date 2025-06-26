@@ -2,6 +2,10 @@
 
 This repository contains a minimal prototype for a RuneScape-like web game. Below is a list of potential skills grouped into categories.
 
+## Skill System Demo
+
+A very simple skill system is implemented in `RunescapeWebGame/js/main.js`. Click the **Train Attack** button on the web page to gain experience and watch the Attack level increase.
+
 ## Skill Categories
 
 ### Combat & Survival
